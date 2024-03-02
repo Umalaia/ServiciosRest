@@ -4,5 +4,5 @@ import proyectos.empleados.entities.EmpleadoEnProyecto;
 
 public interface EmpleadoEnProyectoRepository extends JpaRepository<EmpleadoEnProyecto, Integer>{
 
-	
+	 
 }

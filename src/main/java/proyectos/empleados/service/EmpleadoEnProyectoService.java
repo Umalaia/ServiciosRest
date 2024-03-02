@@ -6,5 +6,5 @@ public interface EmpleadoEnProyectoService {
 	List<EmpleadoEnProyecto> verEmpleadosConProyectos();
 	EmpleadoEnProyecto altaEmpleadoEnProyecto(EmpleadoEnProyecto empleEnProy);
 	EmpleadoEnProyecto verUnEmpleadoEnProyecto(int idEntrada);
-	
+	EmpleadoEnProyecto verProyecto(int idProyecto);
 }

@@ -32,4 +32,10 @@ public class EmpleadoEnProyectoServiceImpl implements EmpleadoEnProyectoService{
 		return epRepo.findById(idEntrada).orElse(null);
 	}
 
+	@Override
+	public EmpleadoEnProyecto verProyecto(int idProyecto) {
+		return epRepo.findById(idProyecto).orElse(null);
+	}
+
+
 }

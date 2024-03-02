@@ -56,6 +56,7 @@ public class ProyectoRestController {
 	}
 	
 	
+	
 	@PutMapping("/editar")
 	public ResponseEntity<String> editarProyecto(@RequestBody Proyecto proyecto){
 		if(pServ.modificarProyecto(proyecto) != null) {
@@ -63,5 +64,6 @@ public class ProyectoRestController {
 		}else
 			return ResponseEntity.status(500).body("No se ha modificado el proyecto");
 	}
+	
 
 }

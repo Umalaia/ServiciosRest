@@ -42,7 +42,6 @@ public class ProyectoServiceImpl implements ProyectoService{
 	}
 	
 
-
 	@Override
 	public Proyecto modificarProyecto(Proyecto proyecto) {
 	    if(verUnProyecto(proyecto.getIdProyecto()) != null) {
@@ -52,7 +51,7 @@ public class ProyectoServiceImpl implements ProyectoService{
 	    }
 	}
 
-
+	
 	@Override
 	public List<Proyecto> verProyectosActivos() {
 		return pRepo.verActivos();

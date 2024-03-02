@@ -59,4 +59,6 @@ public class EmpleadoEnProyecto implements Serializable {
 	public int hashCode() {
 		return Objects.hash(idEntrada);
 	}
+	
+	
 }

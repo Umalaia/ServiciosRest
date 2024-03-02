@@ -28,6 +28,7 @@ public class EmpleadosEnProyectoRestController {
 	@Autowired
 	private ProyectoService pServ;
 	
+	
 	@GetMapping("/todos")
 	public List<EmpleadoEnProyecto> verTodos(){
 		return epServ.verEmpleadosConProyectos();
@@ -40,7 +41,8 @@ public class EmpleadosEnProyectoRestController {
 		ep.setProyecto(pServ.verUnProyecto(epDto.getIdProyecto()));
 		ep.setDiasPrevistos(epDto.getDiasPrevistos());
 		ep.setFechaIncorporacion(epDto.getFechaIncorporacion());
-		if(epServ.altaEmpleadoEnProyecto(ep) != null /*&& pServ.verUnProyecto(epDto.getIdProyecto()) == ep.getProyecto()*/){
+		if(epServ.altaEmpleadoEnProyecto(ep) != null 
+				/*&& pServ.verUnProyecto(epDto.getIdProyecto()) == emp.getProyecto().getIdProyecto()*/){
 			return ResponseEntity.status(200).body("Alta realizada correctamente");
 		}
 		else 

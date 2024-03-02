@@ -31,14 +31,21 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 	}
 
 	@Override
-	public int eliminarEmpleado(int idEmpleado) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean eliminarEmpleado(int idEmpleado) {
+		try {
+			if(verUnEmpleado(idEmpleado) != null) {
+				eRepo.deleteById(idEmpleado);
+				return true;
+			}else
+			return false;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override
 	public Empleado modificarEmpleado(Empleado empleado) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
