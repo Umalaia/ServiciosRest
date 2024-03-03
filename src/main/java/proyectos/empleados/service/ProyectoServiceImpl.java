@@ -43,9 +43,14 @@ public class ProyectoServiceImpl implements ProyectoService{
 	
 
 	@Override
-	public Proyecto modificarProyecto(Proyecto proyecto) {
-	    if(verUnProyecto(proyecto.getIdProyecto()) != null) {
-	        return pRepo.save(proyecto);
+	public Proyecto modificarProyecto(Proyecto proyecto, int idProyecto) {
+		Proyecto proy = verUnProyecto(idProyecto);
+	    if( proy != null) {
+	    	proy.setDescripcion(proyecto.getDescripcion());
+	    	proy.setDiasPrevistos(proyecto.getDiasPrevistos());
+	    	proy.setFechaInicio(proyecto.getFechaInicio());
+	    	proy.setEstado(proyecto.getEstado());
+	        return pRepo.save(proy);
 	    } else {
 	        return null;
 	    }

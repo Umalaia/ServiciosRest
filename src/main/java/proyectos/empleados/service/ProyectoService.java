@@ -9,7 +9,7 @@ public interface ProyectoService {
 	Proyecto verUnProyecto(int idProyecto);
 	Proyecto altaProyecto(Proyecto proyecto);
 	boolean eliminarProyecto(int idProyecto);
-	Proyecto modificarProyecto(Proyecto proyecto);
+	Proyecto modificarProyecto(Proyecto proyecto, int idProyecto);
 	List<Proyecto> verProyectosActivos();
 
 }

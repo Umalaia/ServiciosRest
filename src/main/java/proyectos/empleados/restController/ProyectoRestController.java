@@ -54,12 +54,11 @@ public class ProyectoRestController {
 		}else
 			return ResponseEntity.status(500).body("Alta no realizada");
 	}
+			
 	
-	
-	
-	@PutMapping("/editar")
-	public ResponseEntity<String> editarProyecto(@RequestBody Proyecto proyecto){
-		if(pServ.modificarProyecto(proyecto) != null) {
+	@PutMapping("/editar/{idProyecto}")
+	public ResponseEntity<String> editarProyecto(@PathVariable("idProyecto") int idProyecto, @RequestBody Proyecto proyecto){
+		if(pServ.modificarProyecto(proyecto, idProyecto) != null) {
 			return ResponseEntity.status(200).body("Proyecto modificado correctamente");
 		}else
 			return ResponseEntity.status(500).body("No se ha modificado el proyecto");
