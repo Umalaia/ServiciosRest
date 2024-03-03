@@ -30,10 +30,7 @@ public class EmpleadosEnProyectoRestController {
 	
 	@Autowired
 	private ProyectoService pServ;
-	
-	@Autowired
-	private ModelMapper modelMapper;
-	
+
 	
 	@GetMapping("/todos")
 	public List<EmpleadoEnProyecto> verTodos(){
@@ -43,7 +40,12 @@ public class EmpleadosEnProyectoRestController {
 	
 	@PostMapping("/alta")
 	public ResponseEntity<String> alta(@RequestBody EmpleadoEnProyectoDto epDto){
-		EmpleadoEnProyecto ep= modelMapper(epDto);
+		//EmpleadoEnProyecto ep= modelMapper(epDto);
+		EmpleadoEnProyecto ep= new EmpleadoEnProyecto();
+		ep.setEmpleado(eServ.verUnEmpleado(epDto.getIdEmpleado()));
+		ep.setProyecto(pServ.verUnProyecto(epDto.getIdProyecto()));
+		ep.setDiasPrevistos(epDto.getDiasPrevistos());
+		ep.setFechaIncorporacion(epDto.getFechaIncorporacion());
 		if(epServ.altaEmpleadoEnProyecto(ep) != null){
 			return ResponseEntity.status(HttpStatus.OK.value()).body("Alta realizada correctamente");
 		} else {
@@ -51,7 +53,7 @@ public class EmpleadosEnProyectoRestController {
 		}
 	}
 		
-	
+	/*
 	//Mapper Dto
 	private EmpleadoEnProyecto modelMapper(EmpleadoEnProyectoDto epDto) {
 		EmpleadoEnProyecto ep= new EmpleadoEnProyecto();
@@ -62,6 +64,6 @@ public class EmpleadosEnProyectoRestController {
 		
 		return ep;
 	}
-		
+	*/	
 
 }

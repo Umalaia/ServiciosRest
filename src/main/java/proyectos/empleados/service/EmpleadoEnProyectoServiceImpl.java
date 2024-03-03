@@ -20,13 +20,14 @@ public class EmpleadoEnProyectoServiceImpl implements EmpleadoEnProyectoService 
 
 	@Override
 	public EmpleadoEnProyecto altaEmpleadoEnProyecto(EmpleadoEnProyecto empleEnProy) {
+		boolean noExiste = existeEmpleadoEnProyecto(empleEnProy.getProyecto().getIdProyecto(), empleEnProy.getEmpleado().getIdEmpleado()) == null;
 		try {
-			if(existeEmpleadoEnProyecto(empleEnProy.getProyecto().getIdProyecto(), empleEnProy.getEmpleado().getIdEmpleado()) != null)
+			if(noExiste)
 			return epRepo.save(empleEnProy);	
 		} catch (Exception e) {
 			return null;
 		}
-		return empleEnProy;
+		return null;
 	}
 
 	@Override
