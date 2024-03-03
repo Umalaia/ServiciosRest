@@ -8,8 +8,8 @@ import proyectos.empleados.entities.EmpleadoEnProyecto;
 import proyectos.empleados.repository.EmpleadoEnProyectoRepository;
 
 @Service
-public class EmpleadoEnProyectoServiceImpl implements EmpleadoEnProyectoService{
-	
+public class EmpleadoEnProyectoServiceImpl implements EmpleadoEnProyectoService {
+
 	@Autowired
 	private EmpleadoEnProyectoRepository epRepo;
 
@@ -21,10 +21,12 @@ public class EmpleadoEnProyectoServiceImpl implements EmpleadoEnProyectoService{
 	@Override
 	public EmpleadoEnProyecto altaEmpleadoEnProyecto(EmpleadoEnProyecto empleEnProy) {
 		try {
-			return epRepo.save(empleEnProy);
+			if(existeEmpleadoEnProyecto(empleEnProy.getProyecto().getIdProyecto(), empleEnProy.getEmpleado().getIdEmpleado()) != null)
+			return epRepo.save(empleEnProy);	
 		} catch (Exception e) {
 			return null;
 		}
+		return empleEnProy;
 	}
 
 	@Override
@@ -36,6 +38,12 @@ public class EmpleadoEnProyectoServiceImpl implements EmpleadoEnProyectoService{
 	public EmpleadoEnProyecto verProyecto(int idProyecto) {
 		return epRepo.findById(idProyecto).orElse(null);
 	}
+
+	@Override
+	public EmpleadoEnProyecto existeEmpleadoEnProyecto(int idProyecto, int idEmpleado) {
+		return epRepo.buscarEmpleadoEnProyecto(idProyecto, idEmpleado);
+	}
+	
 
 
 }
