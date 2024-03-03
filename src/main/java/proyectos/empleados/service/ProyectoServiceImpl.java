@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import proyectos.empleados.entities.Empleado;
 import proyectos.empleados.entities.Proyecto;
 import proyectos.empleados.repository.ProyectoRepository;
 @Service
@@ -60,6 +61,11 @@ public class ProyectoServiceImpl implements ProyectoService{
 	@Override
 	public List<Proyecto> verProyectosActivos() {
 		return pRepo.verActivos();
+	}
+
+	@Override
+	public Empleado verDirectorDeProyecto(int idProyecto) {
+		return pRepo.verDirectorProyecto(idProyecto);
 	}
 
 

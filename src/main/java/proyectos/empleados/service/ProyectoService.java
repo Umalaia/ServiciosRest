@@ -2,6 +2,7 @@ package proyectos.empleados.service;
 
 import java.util.List;
 
+import proyectos.empleados.entities.Empleado;
 import proyectos.empleados.entities.Proyecto;
 
 public interface ProyectoService {
@@ -11,5 +12,6 @@ public interface ProyectoService {
 	boolean eliminarProyecto(int idProyecto);
 	Proyecto modificarProyecto(Proyecto proyecto, int idProyecto);
 	List<Proyecto> verProyectosActivos();
-
+	Empleado verDirectorDeProyecto(int idProyecto);
+	
 }
