@@ -1,6 +1,4 @@
 package proyectos.empleados.restController;
-
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import proyectos.empleados.entities.Empleado;
 import proyectos.empleados.entities.Proyecto;
 import proyectos.empleados.service.ProyectoService;
@@ -26,51 +23,54 @@ public class ProyectoRestController {
 
 	
 	@GetMapping("/verTodos")
-	public List<Proyecto> verTodos(){
-		return pServ.verTodosLosProyectos();
+	public ResponseEntity<?> verTodos(){
+		return ResponseEntity.status(HttpStatus.OK.value()).body(pServ.verTodosLosProyectos());
 	}
 	
 	@GetMapping("/verDetalles/{id}")
-	public ResponseEntity<Proyecto> verProyecto(@PathVariable ("id") int idProyecto){
-		return ResponseEntity.status(200).body(pServ.verUnProyecto(idProyecto));
+	public ResponseEntity<?> verProyecto(@PathVariable ("id") int idProyecto){
+		if(pServ.verUnProyecto(idProyecto) != null)
+			return ResponseEntity.status(HttpStatus.OK.value()).body(pServ.verUnProyecto(idProyecto));
+		else
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body("No existe el proyecto");
 	}
 	
 	@GetMapping("/verActivos")
-	public List<Proyecto> activos(){
-		return pServ.verProyectosActivos();
+	public ResponseEntity<?>  activos(){
+		return ResponseEntity.status(HttpStatus.OK.value()).body(pServ.verProyectosActivos());
 	}
 	
 	
 	@DeleteMapping("/eliminar/{id}")
 	public ResponseEntity<String> eliminarProyecto(@PathVariable ("id") int idProyecto){
 		if(pServ.eliminarProyecto(idProyecto) == true) {
-			return ResponseEntity.status(200).body("Proyecto eliminado");
+			return ResponseEntity.status(HttpStatus.OK.value()).body("Proyecto eliminado");
 		}else 
-			return ResponseEntity.status(500).body("Proyecto no se ha podido eliminar");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body("Proyecto no se ha podido eliminar");
 	}
 	
 	
 	@PostMapping("/alta")
 	public ResponseEntity<String> altaProyecto(@RequestBody Proyecto proyecto){
 		if(pServ.altaProyecto(proyecto) != null) {
-			return ResponseEntity.status(200).body("Alta realizada correctamente");
+			return ResponseEntity.status(HttpStatus.OK.value()).body("Alta realizada correctamente");
 		}else
-			return ResponseEntity.status(500).body("Alta no realizada");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body("Alta no realizada");
 	}
 			
 	
-	@PutMapping("/editar/{idProyecto}")
-	public ResponseEntity<String> editarProyecto(@PathVariable("idProyecto") int idProyecto, @RequestBody Proyecto proyecto){
+	@PutMapping("/editar/{id}")
+	public ResponseEntity<String> editarProyecto(@PathVariable("id") int idProyecto, @RequestBody Proyecto proyecto){
 		if(pServ.modificarProyecto(proyecto, idProyecto) != null) {
-			return ResponseEntity.status(200).body("Proyecto modificado correctamente");
+			return ResponseEntity.status(HttpStatus.OK.value()).body("Proyecto modificado correctamente");
 		}else
-			return ResponseEntity.status(500).body("No se ha modificado el proyecto");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body("No se ha modificado el proyecto");
 	}
 	
 	
 	@GetMapping("/verDirector/{id}")
 	public ResponseEntity<Empleado> verDirector(@PathVariable("id") int idProyecto){
-		return ResponseEntity.status(200).body(pServ.verDirectorDeProyecto(idProyecto));
+		return ResponseEntity.status(HttpStatus.OK.value()).body(pServ.verDirectorDeProyecto(idProyecto));
 	}
 	
 

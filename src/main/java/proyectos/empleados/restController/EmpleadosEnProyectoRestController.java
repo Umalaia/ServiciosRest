@@ -1,8 +1,5 @@
 package proyectos.empleados.restController;
 
-import java.util.List;
-
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +30,8 @@ public class EmpleadosEnProyectoRestController {
 
 	
 	@GetMapping("/todos")
-	public List<EmpleadoEnProyecto> verTodos(){
-		return epServ.verEmpleadosConProyectos();
+	public ResponseEntity<?> verTodos(){
+		return ResponseEntity.status(HttpStatus.OK.value()).body(epServ.verEmpleadosConProyectos());
 	}
 	
 	

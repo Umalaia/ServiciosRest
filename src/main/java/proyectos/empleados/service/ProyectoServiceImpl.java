@@ -50,12 +50,12 @@ public class ProyectoServiceImpl implements ProyectoService{
 	    	proy.setDescripcion(proyecto.getDescripcion());
 	    	proy.setDiasPrevistos(proyecto.getDiasPrevistos());
 	    	proy.setFechaInicio(proyecto.getFechaInicio());
-	    	proy.setEstado(proyecto.getEstado());
+	    	proy.setEstado(proyecto.getEstado()); 
 	        return pRepo.save(proy);
-	    } else {
+	    } else 
 	        return null;
-	    }
 	}
+	
 
 	
 	@Override
