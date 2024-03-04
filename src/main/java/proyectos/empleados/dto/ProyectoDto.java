@@ -13,11 +13,8 @@ import lombok.NoArgsConstructor;
 public class ProyectoDto {
 
 	private String descripcion;
-	
 	private Date fechaInicio;
-	
 	private int diasPrevistos;
-
 	private String estado;
 
 }

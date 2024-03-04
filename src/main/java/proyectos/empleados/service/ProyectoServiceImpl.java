@@ -43,7 +43,7 @@ public class ProyectoServiceImpl implements ProyectoService{
 		}
 	}
 	
-	
+	/*
 	@Override
 	public Proyecto modificarProyecto(Proyecto proyecto, int idProyecto) {
 		Proyecto proy = verUnProyecto(idProyecto);
@@ -56,11 +56,21 @@ public class ProyectoServiceImpl implements ProyectoService{
 	    } else 
 	        return null;
 	}
+	*/
 	
 	
-
+	@Override
+	public Proyecto modificarProyecto(Proyecto proyecto, int idProyecto) {
+		try {
+			if(verUnProyecto(idProyecto) != null)
+				return pRepo.save(proyecto);
+			else
+				return null;
+		} catch (Exception e) {
+			return null;
+		}	
+	}
 	
-
 	
 	@Override
 	public List<Proyecto> verProyectosActivos() {

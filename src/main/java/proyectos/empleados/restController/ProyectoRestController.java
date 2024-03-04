@@ -1,4 +1,5 @@
 package proyectos.empleados.restController;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import proyectos.empleados.dto.ProyectoDto;
 import proyectos.empleados.entities.Empleado;
 import proyectos.empleados.entities.Proyecto;
 import proyectos.empleados.service.ProyectoService;
@@ -58,10 +61,24 @@ public class ProyectoRestController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body("Alta no realizada");
 	}
 			
-	
+	/*
+	 * Modificar proyecto sin Dto
 	@PutMapping("/editar/{id}")
 	public ResponseEntity<String> editarProyecto(@PathVariable("id") int idProyecto, @RequestBody Proyecto proyecto){
 		if(pServ.modificarProyecto(proyecto, idProyecto) != null) {
+			return ResponseEntity.status(HttpStatus.OK.value()).body("Proyecto modificado correctamente");
+		}else
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body("No se ha modificado el proyecto");
+	}
+	*/
+	
+	//Modificar proyecto con Dto
+	@PutMapping("/editar/{id}")
+	public ResponseEntity<?> editarProyecto(@PathVariable("id") int idProyecto, @RequestBody ProyectoDto proyectoDto){
+		Proyecto proy = pServ.verUnProyecto(idProyecto);
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.map(proyectoDto, proy);
+		if(pServ.modificarProyecto(proy, idProyecto) != null) {
 			return ResponseEntity.status(HttpStatus.OK.value()).body("Proyecto modificado correctamente");
 		}else
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body("No se ha modificado el proyecto");

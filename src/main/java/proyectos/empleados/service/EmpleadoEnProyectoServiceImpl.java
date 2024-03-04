@@ -19,7 +19,7 @@ public class EmpleadoEnProyectoServiceImpl implements EmpleadoEnProyectoService 
 		return epRepo.findAll();
 	}
 
-	/*
+	
 	@Override
 	public EmpleadoEnProyecto altaEmpleadoEnProyecto(EmpleadoEnProyecto empleadoEnProyecto) {
 		boolean noExiste = existeEmpleadoEnProyecto(empleadoEnProyecto.getProyecto().getIdProyecto(), empleadoEnProyecto.getEmpleado().getIdEmpleado()) == null;
@@ -33,13 +33,14 @@ public class EmpleadoEnProyectoServiceImpl implements EmpleadoEnProyectoService 
 		}
 	}
 	
-	*/
 	
+	/*
+	 * Sin comprobar (manera simple)
 	@Override
 	public EmpleadoEnProyecto altaEmpleadoEnProyecto(EmpleadoEnProyecto empleadoEnProyecto) {
 		return epRepo.save(empleadoEnProyecto);
 	}
-	
+	*/
 
 	@Override
 	public EmpleadoEnProyecto verUnaEntradaEnProyecto(int idEntrada) {
