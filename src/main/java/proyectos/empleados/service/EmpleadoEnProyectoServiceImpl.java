@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import proyectos.empleados.dto.EmpleadoEnProyectoDto;
 import proyectos.empleados.entities.EmpleadoEnProyecto;
 import proyectos.empleados.repository.EmpleadoEnProyectoRepository;
 
@@ -19,11 +20,11 @@ public class EmpleadoEnProyectoServiceImpl implements EmpleadoEnProyectoService 
 	}
 
 	@Override
-	public EmpleadoEnProyecto altaEmpleadoEnProyecto(EmpleadoEnProyecto empleEnProy) {
-		boolean noExiste = existeEmpleadoEnProyecto(empleEnProy.getProyecto().getIdProyecto(), empleEnProy.getEmpleado().getIdEmpleado()) == null;
+	public EmpleadoEnProyecto altaEmpleadoEnProyecto(EmpleadoEnProyecto empleadoEnProyecto) {
+		boolean noExiste = existeEmpleadoEnProyecto(empleadoEnProyecto.getProyecto().getIdProyecto(), empleadoEnProyecto.getEmpleado().getIdEmpleado()) == null;
 		try {
 			if(noExiste)
-			return epRepo.save(empleEnProy);	
+			return epRepo.save(empleadoEnProyecto);	
 		} catch (Exception e) {
 			return null;
 		}
@@ -31,20 +32,29 @@ public class EmpleadoEnProyectoServiceImpl implements EmpleadoEnProyectoService 
 	}
 
 	@Override
-	public EmpleadoEnProyecto verUnEmpleadoEnProyecto(int idEntrada) {
+	public EmpleadoEnProyecto verUnaEntradaEnProyecto(int idEntrada) {
 		return epRepo.findById(idEntrada).orElse(null);
 	}
 
-	@Override
-	public EmpleadoEnProyecto verProyecto(int idProyecto) {
-		return epRepo.findById(idProyecto).orElse(null);
-	}
+
 
 	@Override
 	public EmpleadoEnProyecto existeEmpleadoEnProyecto(int idProyecto, int idEmpleado) {
 		return epRepo.buscarEmpleadoEnProyecto(idProyecto, idEmpleado);
 	}
-	
 
+	@Override
+	public boolean eliminarEmpleadoEnProyecto(int idEntrada) {
+		try {
+			if(verUnaEntradaEnProyecto(idEntrada)!= null) {
+				epRepo.deleteById(idEntrada);
+				return true;
+			}else
+				return false;
+		} catch (Exception e) {
+				return false;
+	}
+	
+	}
 
 }
