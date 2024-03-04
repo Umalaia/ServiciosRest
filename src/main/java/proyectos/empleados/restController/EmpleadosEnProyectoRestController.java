@@ -1,5 +1,6 @@
 package proyectos.empleados.restController;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class EmpleadosEnProyectoRestController {
 	
 	@GetMapping("/todos")
 	public ResponseEntity<?> verTodos(){
-		return ResponseEntity.status(HttpStatus.OK.value()).body(epServ.verEmpleadosConProyectos());
+		return ResponseEntity.status(HttpStatus.OK.value()).body(epServ.verTodos());
 	}
 	
 	
@@ -48,13 +49,22 @@ public class EmpleadosEnProyectoRestController {
 	
 	
 	@GetMapping("/existe/{idProyecto}/{idEmpleado}")
-	public ResponseEntity<?> existe(@PathVariable ("idProyecto") int idProyecto, @PathVariable ("idEmpleado") int idEmpleado){
+	public ResponseEntity<String> existe(@PathVariable ("idProyecto") int idProyecto, @PathVariable ("idEmpleado") int idEmpleado){
 		if(epServ.existeEmpleadoEnProyecto(idProyecto, idEmpleado) != null){
 			return ResponseEntity.status(HttpStatus.OK.value()).body("Existe el empleado");
 		}else
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body("No existe el empleado");
 	}
 	
+	
+	@DeleteMapping("/eliminar/{id}")
+	public ResponseEntity<String> eliminar(@PathVariable ("id") int idEntrada){
+		if(epServ.eliminarEmpleadoEnProyecto(idEntrada) == true) 
+			return ResponseEntity.status(HttpStatus.OK.value()).body("Entrada eliminada");
+		else
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body("Entrada no eliminada");
+	}
+
 	
 	@PostMapping("/alta")
 	public ResponseEntity<String> alta(@RequestBody EmpleadoEnProyectoDto epDto){
@@ -85,12 +95,17 @@ public class EmpleadosEnProyectoRestController {
 	*/	
 	
 	
-	@DeleteMapping("/eliminar/{id}")
-	public ResponseEntity<String> eliminar(@PathVariable ("id") int idEntrada){
-		if(epServ.eliminarEmpleadoEnProyecto(idEntrada) == true) 
-			return ResponseEntity.status(HttpStatus.OK.value()).body("Entrada eliminada");
-		else
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body("Entrada no eliminada");
+	@PostMapping("/altaModelMapper")
+	public ResponseEntity<String> altaModelMapper(@RequestBody EmpleadoEnProyectoDto epDto){
+		EmpleadoEnProyecto ep= new EmpleadoEnProyecto();
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.map(epDto, ep);
+		if(epServ.altaEmpleadoEnProyecto(ep) != null){
+			return ResponseEntity.status(HttpStatus.OK.value()).body("Alta realizada correctamente");
+		} else {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body("Alta no realizada");
+		}
 	}
+	
 
 }

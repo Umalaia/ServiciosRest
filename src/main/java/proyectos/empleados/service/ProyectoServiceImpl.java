@@ -2,6 +2,7 @@ package proyectos.empleados.service;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +43,7 @@ public class ProyectoServiceImpl implements ProyectoService{
 		}
 	}
 	
-
+	
 	@Override
 	public Proyecto modificarProyecto(Proyecto proyecto, int idProyecto) {
 		Proyecto proy = verUnProyecto(idProyecto);
@@ -55,6 +56,9 @@ public class ProyectoServiceImpl implements ProyectoService{
 	    } else 
 	        return null;
 	}
+	
+	
+
 	
 
 	

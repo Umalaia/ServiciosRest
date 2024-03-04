@@ -8,5 +8,5 @@ import proyectos.empleados.entities.EmpleadoEnProyecto;
 public interface EmpleadoEnProyectoRepository extends JpaRepository<EmpleadoEnProyecto, Integer>{
 
 	@Query("select e from EmpleadoEnProyecto e where e.proyecto.idProyecto = :idProyecto and e.empleado.idEmpleado = :idEmpleado")
-	EmpleadoEnProyecto buscarEmpleadoEnProyecto(@Param("idProyecto") int idProyecto, @Param("idEmpleado") int idEmpleado);
+	public EmpleadoEnProyecto buscarEmpleadoEnProyecto(int idProyecto,int idEmpleado);
 }

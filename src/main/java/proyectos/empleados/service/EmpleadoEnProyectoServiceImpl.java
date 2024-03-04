@@ -15,7 +15,7 @@ public class EmpleadoEnProyectoServiceImpl implements EmpleadoEnProyectoService 
 	private EmpleadoEnProyectoRepository epRepo;
 
 	@Override
-	public List<EmpleadoEnProyecto> verEmpleadosConProyectos() {
+	public List<EmpleadoEnProyecto> verTodos() {
 		return epRepo.findAll();
 	}
 
@@ -25,10 +25,11 @@ public class EmpleadoEnProyectoServiceImpl implements EmpleadoEnProyectoService 
 		try {
 			if(noExiste)
 			return epRepo.save(empleadoEnProyecto);	
+			else
+				return null;
 		} catch (Exception e) {
 			return null;
 		}
-		return null;
 	}
 
 	@Override
@@ -55,6 +56,11 @@ public class EmpleadoEnProyectoServiceImpl implements EmpleadoEnProyectoService 
 				return false;
 	}
 	
+	}
+
+	@Override
+	public EmpleadoEnProyecto modificarEmpleadoEnProyecto(int idProyecto, int idEmpleado) {
+		return null;
 	}
 
 }
