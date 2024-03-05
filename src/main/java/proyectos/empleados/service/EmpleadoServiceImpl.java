@@ -25,9 +25,8 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 	}
 
 	@Override
-	public boolean altaEmpleado(int idEmpleado) {
-		// TODO Auto-generated method stub
-		return false;
+	public Empleado altaEmpleado(Empleado empleado) {
+		return eRepo.save(empleado);
 	}
 
 	@Override
@@ -44,9 +43,15 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 	}
 
 	@Override
-	public Empleado modificarEmpleado(Empleado empleado) {
-
-		return null;
+	public Empleado modificarEmpleado(Empleado empleado, int idEmpleado) {
+		try {
+			if(verUnEmpleado(idEmpleado) != null)
+				return eRepo.save(empleado);
+			else
+				return null;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }

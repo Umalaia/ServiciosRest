@@ -74,7 +74,7 @@ public class ProyectoRestController {
 	
 	//Modificar proyecto con Dto
 	@PutMapping("/editar/{id}")
-	public ResponseEntity<?> editarProyecto(@PathVariable("id") int idProyecto, @RequestBody ProyectoDto proyectoDto){
+	public ResponseEntity<String> editarProyecto(@PathVariable("id") int idProyecto, @RequestBody ProyectoDto proyectoDto){
 		Proyecto proy = pServ.verUnProyecto(idProyecto);
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.map(proyectoDto, proy);
